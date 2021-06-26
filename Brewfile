@@ -6,21 +6,20 @@ tap 'homebrew/bundle'
 tap 'nicoverbruggen/homebrew-cask'
 
 # Binaries
-brew 'awscli'
+brew 'asimov'
 brew 'bash' # Latest Bash version
 brew 'coreutils' # Those that come with macOS are outdated
-brew 'ffmpeg'
+brew 'fish'
+# brew 'ffmpeg'
 brew 'gh'
 brew 'git'
 brew 'gnupg'
 brew 'grep'
-brew 'httpie'
-brew 'hub'
+#brew 'httpie'
+# brew 'hub'
 brew 'mackup'
 brew 'mas' # Mac App Store manager
 brew 'pkg-config' # https://github.com/driesvints/dotfiles/issues/20
-brew 'stripe/stripe-cli/stripe'
-brew 'svn'
 brew 'trash' # Manage the Trash bin
 brew 'tree' # List directories in a tree structure
 brew 'zlib' # Needed for Memcached
@@ -35,7 +34,7 @@ brew 'gifsicle'
 # Development
 brew 'php'
 brew 'php@7.4'
-brew 'php@7.3'
+brew 'phpmon'
 brew 'composer'
 brew 'imagemagick'
 brew 'libmemcached'
@@ -44,64 +43,70 @@ brew 'memcached'
 brew 'mysql'
 brew 'nginx'
 brew 'node'
+brew 'nvm'
 brew 'redis'
-brew 'yarn'
+brew 'starship'
 
 # Apps
-cask '1password'
-cask '1password-cli'
-cask 'aerial'
-cask 'caffeine'
-cask 'dbngin'
+# cask '1password'
+# cask '1password-cli'
+# cask 'aerial'
+# cask 'caffeine'
+# cask 'dbngin'
+cask 'alfred'
+cask 'cleanshot'
+cask 'bartender'
+cask 'brave-browser'
+cask 'clickup'
 cask 'discord'
 cask 'docker'
+cask 'dropbox'
+cask 'enpass'
 cask 'figma'
 cask 'firefox'
 cask 'github'
 cask 'google-backup-and-sync'
-cask 'google-chrome'
-cask 'gpg-suite'
+cask 'hazel'
+cask 'invoker'
 cask 'imageoptim'
-cask 'insomnia'
-cask 'pastebot'
-cask 'phpmon'
+cask 'notion'
+# cask 'pastebot'
+# cask 'phpmon'
 cask 'phpstorm'
-cask 'ray'
-cask 'screenflow'
+cask 'rambox'
 cask 'signal'
 cask 'slack'
-cask 'sublime-text'
+cask 'spotify'
 cask 'tableplus'
 cask 'telegram-desktop'
-cask 'the-unarchiver'
 cask 'tinkerwell'
-cask 'transmission'
+cask 'toggl-track'
 cask 'transmit'
-cask 'tunnelbear'
-cask 'tuple'
 cask 'visual-studio-code'
-cask 'vlc'
-cask 'zoom'
+
+cask 'numi'
+cask 'keka'
+cask 'moneymoney'
+cask 'sip'
+cask 'swish'
+cask 'tyme'
+cask 'banking-4'
 
 # Quicklook
 cask 'qlmarkdown'
 cask 'quicklook-json'
 
 # Fonts
-cask 'font-lato'
-cask 'font-open-sans'
-cask 'font-roboto'
-cask 'font-source-code-pro-for-powerline'
-cask 'font-source-code-pro'
-cask 'font-source-sans-pro'
-cask 'font-source-serif-pro'
+cask 'font-fira-code'
 
 # Mac App Store
-mas 'Byword', id: 420212497
-mas 'Giphy Capture', id: 668208984
-mas 'Keynote', id: 409183694
-mas 'Numbers', id: 409203825
-mas 'Spark', id: 1176895641
-mas 'Speedtest', id: 1153157709
-mas 'Things', id: 904280696
-mas 'Tweetbot', id: 1384080005
+# mas 'Giphy Capture', id: 668208984
+# mas 'Keynote', id: 409183694
+# mas 'Numbers', id: 409203825
+# mas 'Spark', id: 1176895641
+# mas 'Speedtest', id: 1153157709
+# mas 'Things', id: 904280696
+# mas 'Tweetbot', id: 1384080005
+
+# mas 'petrify', id: 145117798
+# mas 'Rank Guru', id: 662946309

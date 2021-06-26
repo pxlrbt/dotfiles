@@ -2,15 +2,14 @@
 
 echo "Setting up your Mac..."
 
-# Check for Oh My Zsh and install if we don't have it
-if test ! $(which omz); then
-  /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
-fi
+xcode-select --install
 
 # Check for Homebrew and install if we don't have it
 if test ! $(which brew); then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Update Homebrew recipes
 brew update
@@ -18,36 +17,48 @@ brew update
 # Install all our dependencies with bundle (See Brewfile)
 brew tap homebrew/bundle
 brew bundle
+brew cleanup
+
+brew service start asimov
+brew service start nginx
+brew service start mysql
+brew service start php@7.4
+
+export PATH="/opt/homebrew/bin:$PATH"
+
+# Set fish as default shell
+if ! cat /etc/shells | grep fish; then
+  echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
+  chsh -s /opt/homebrew/bin/fish
+fi
 
 # Set default MySQL root password and auth type
 mysql -u root -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;"
 
 # Install PHP extensions with PECL
-pecl install imagick memcached redis swoole
-
-# Install global Composer packages
-/usr/local/bin/composer global require laravel/installer laravel/valet beyondcode/expose
-
-# Install Laravel Valet
-$HOME/.composer/vendor/bin/valet install
+pecl install redis xdebug
 
 # Create a Sites directory
-mkdir $HOME/Sites
+mkdir $HOME/Code
 
 # Create sites subdirectories
-mkdir $HOME/Sites/blade-ui-kit
-mkdir $HOME/Sites/eventsauce
-mkdir $HOME/Sites/laravel
+mkdir $HOME/Code/bluedom
+mkdir $HOME/Code/leitsch
+mkdir $HOME/Code/pxlrbt
 
 # Clone Github repositories
-./clone.sh
-
-# Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
-rm -rf $HOME/.zshrc
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+# ./clone.sh
 
 # Symlink the Mackup config file to the home directory
 ln -s $HOME/.dotfiles/.mackup.cfg $HOME/.mackup.cfg
+mackup restore
+
+# Install global Composer packages
+composer global install
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+# Install Laravel Valet
+valet install
 
 # Set macOS preferences - we will run this last because this will reload the shell
-source .macos
+sh macos-settings.sh
