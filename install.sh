@@ -42,14 +42,6 @@ pecl install redis xdebug
 # Create a Sites directory
 mkdir $HOME/Code
 
-# Create sites subdirectories
-mkdir $HOME/Code/bluedom
-mkdir $HOME/Code/leitsch
-mkdir $HOME/Code/pxlrbt
-
-# Clone Github repositories
-# ./clone.sh
-
 # Symlink the Mackup config file to the home directory
 ln -s $HOME/.dotfiles/.mackup.cfg $HOME/.mackup.cfg
 mackup restore
