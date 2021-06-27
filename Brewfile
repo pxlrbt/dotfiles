@@ -38,9 +38,10 @@ brew 'phpmon'
 brew 'composer'
 brew 'imagemagick'
 brew 'libmemcached'
+brew 'mariadb'
+brew 'mailhog'
 brew 'meilisearch'
 brew 'memcached'
-brew 'mysql'
 brew 'nginx'
 brew 'node'
 brew 'nvm'
@@ -64,8 +65,6 @@ cask 'dropbox'
 cask 'enpass'
 cask 'figma'
 cask 'firefox'
-cask 'github'
-cask 'google-backup-and-sync'
 cask 'hazel'
 cask 'invoker'
 cask 'imageoptim'
@@ -86,11 +85,13 @@ cask 'visual-studio-code'
 
 cask 'numi'
 cask 'keka'
+
 cask 'moneymoney'
-cask 'sip'
 cask 'swish'
-cask 'tyme'
-cask 'banking-4'
+cask 'forklift'
+# cask 'sip'
+# cask 'tyme'
+# cask 'banking-4'
 
 # Quicklook
 cask 'qlmarkdown'
@@ -103,10 +104,11 @@ cask 'font-fira-code'
 # mas 'Giphy Capture', id: 668208984
 # mas 'Keynote', id: 409183694
 # mas 'Numbers', id: 409203825
-# mas 'Spark', id: 1176895641
+# mas 'Spark', id: 1176895641m
 # mas 'Speedtest', id: 1153157709
 # mas 'Things', id: 904280696
 # mas 'Tweetbot', id: 1384080005
 
+mas 'ColorSlurp', id: 1287239339
 # mas 'petrify', id: 145117798
 # mas 'Rank Guru', id: 662946309

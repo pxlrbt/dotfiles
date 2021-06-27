@@ -21,7 +21,8 @@ brew cleanup
 
 brew service start asimov
 brew service start nginx
-brew service start mysql
+brew service start mailhog
+brew service start mariadb
 brew service start php@7.4
 
 export PATH="/opt/homebrew/bin:$PATH"
