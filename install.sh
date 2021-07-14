@@ -39,6 +39,9 @@ mysql -u root -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_passwor
 # Install PHP extensions with PECL
 pecl install redis xdebug
 
+# Install bass
+git clone https://github.com/edc/bass.git /tmp/bass && cd /tmp/bass && make install
+
 # Create a Sites directory
 mkdir $HOME/Code
 

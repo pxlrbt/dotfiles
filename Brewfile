@@ -63,6 +63,7 @@ cask 'clickup'
 cask 'docker'
 cask 'dropbox'
 cask 'enpass'
+cask 'iina'
 cask 'figma'
 cask 'firefox'
 cask 'hazel'
@@ -74,6 +75,7 @@ cask 'notion'
 cask 'numi'
 # cask 'pastebot'
 # cask 'phpmon'
+cask 'pdf-squeezer'
 cask 'phpstorm'
 cask 'postbox'
 cask 'rambox'
@@ -105,6 +107,11 @@ cask 'font-fira-code'
 # mas 'Things', id: 904280696
 # mas 'Tweetbot', id: 1384080005
 
-mas 'ColorSlurp', id: 1287239339
+mas "ColorSlurp", id: 1287239339
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "TinyStopwatch", id: 1447754003
+
 # mas 'petrify', id: 145117798
 # mas 'Rank Guru', id: 662946309
