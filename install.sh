@@ -52,6 +52,7 @@ mackup restore
 # Install global Composer packages
 composer global install
 export PATH="$HOME/.composer/vendor/bin:$PATH"
+echo "/opt/homebrew/bin" >> /etc/paths
 
 # Install Laravel Valet
 valet install
