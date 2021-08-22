@@ -1,0 +1,87 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+    echo "Usage: dk [args]"
+    exit
+fi
+
+DIR=$(dirname "${BASH_SOURCE[0]}")
+
+function dockerId {
+    if [ ${#1} -eq 12 ]; then
+        id=$(docker ps -qf "id=$1")
+    fi
+
+    if [ -z "$id" ]; then
+        id=$(docker ps | grep $1 | head -n 1 | awk '{print $1}')
+    fi
+
+    echo $id
+}
+
+case "$1" in
+    "c" )
+        if [ "$2" = "id" ]; then
+            docker ps | grep $3 | awk '{print $1}' | head -n 1;
+        else
+            docker container ${@:2};
+        fi
+        ;;
+
+    "i" )
+        if [ "$2" = "id" ]; then
+            docker image ls | grep $3 | awk '{print $3}' | head -n 1;
+        else
+            docker image ${@:2};
+        fi
+        ;;
+
+    "s" )
+        if [ "$2" = "id" ]; then
+            docker service ls | grep $3 | awk '{print $1}' | head -n 1;
+        else
+            docker service ${@:2};
+        fi
+        ;;
+
+    "e" )
+        docker exec -it ${@:2};
+        ;;
+
+    "id" )
+        dockerId $2;
+        ;;
+
+    "clean" )
+        docker container prune;
+        docker image prune;
+        ;;
+
+    "logs" )
+        id=$(dockerId $2)
+        docker logs -f $id;
+        ;;
+
+    "stats" )
+        if [ $# -eq 1 ]
+            then docker stats --no-stream;
+            else docker stats --no-stream | grep --color=auto $2;
+        fi
+        ;;
+
+    "top" )
+        docker stats --format "table {{.Container}}\t{{.Name}}\t{{.CPUPerc}}   {{.MemPerc}}\t{{.NetIO}}\t{{.BlockIO}}"
+        ;;
+
+    "shell" )
+        id=$(dockerId $2)
+        docker exec -it $id ash;
+        ;;
+
+    "find" )
+        docker ps | grep --color=auto $2;
+        ;;
+
+    * )
+        docker ${@:1}
+esac

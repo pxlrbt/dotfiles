@@ -1,0 +1,90 @@
+#!/bin/sh
+
+NAME="$(basename $(pwd))"
+
+# WordPress Config
+WP_USER=dkoch
+WP_EMAIL=info@pixelarbeit.de
+WP_PASS=test
+
+WP_URL="http://$NAME"
+WP_PATH=$(pwd)
+
+# DB Config
+DB_NAME=$(echo $NAME | sed 's/-/_/g')
+DB_USER=root
+DB_PASS=''
+DB_HOST=localhost
+
+function stage_create() {
+    if [ $(find ${WP_PATH} -type f  | wc -l) -gt 0 ]; then
+        echo "\033[41mFound files in '$WP_PATH'\033[0m."
+        read -p "Continue? (y|n) " -n 1 -r
+        echo
+        [[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
+    fi
+
+    echo "Creating Stage $NAME."
+
+    db create $DB_NAME
+
+    # Install WordPress
+    wordpress_download
+    wordpress_configure
+    wordpress_install_plugins
+}
+
+function stage_configure() {
+    echo "Configure WP: $NAME."
+    db create $DB_NAME
+
+    # Install WordPress
+    wordpress_configure
+}
+
+function stage_remove() {
+    read -p "Remove stage $NAME? (y|n) " -n 1 -r
+    [[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
+
+    yes | db drop $DB_NAME
+    rm -r "$WP_PATH"
+}
+
+function wordpress_download() {
+    echo "Downloading wordpress ..."
+    wp core download --path="$WP_PATH"
+    chmod -R g+w "$WP_PATH"
+}
+
+function wordpress_configure() {
+    echo "Configuring wordpress ..."
+    wp config create --path="$WP_PATH" --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=$DB_HOST
+
+    echo "Installing wordpress ..."
+    wp core install --path="$WP_PATH" --url=$WP_URL --title="Staging $NAME" --admin_user=$WP_USER --admin_password=$WP_PASS --admin_email=$WP_EMAIL --skip-email
+    wp config set FS_METHOD direct --path="$WP_PATH"
+}
+
+function wordpress_install_plugins() {
+    # Updraft installation
+    if [[ -n $UPDRAFT_FILE ]]; then
+        echo "Installing updraft ..."
+        wp plugin install "$UPDRAFT_FILE" --activate --path="$WP_PATH"
+    fi
+}
+
+case "$1" in
+    "create" )
+        stage_create
+        echo "\033[42mStage Created.\033[0m"
+        ;;
+
+    "configure" )
+        stage_configure
+        echo "\033[42mStage configured.\033[0m"
+        ;;
+
+    "rm" | "remove" )
+        stage_remove
+    ;;
+esac

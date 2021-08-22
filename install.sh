@@ -45,6 +45,8 @@ git clone https://github.com/edc/bass.git /tmp/bass && cd /tmp/bass && make inst
 # Create a Sites directory
 mkdir $HOME/Code
 
+ln -s $HOME/.dotfiles/bin $HOME/bin
+
 # Symlink the Mackup config file to the home directory
 ln -s $HOME/.dotfiles/.mackup.cfg $HOME/.mackup.cfg
 mackup restore

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+city="$1"
+
+if [ -z "$city" ]; then
+    city="Freiburg"
+fi
+
+eval "curl http://wttr.in/${city}"

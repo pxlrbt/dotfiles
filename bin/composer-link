@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# @author: caleb porzio
+# @source: https://calebporzio.com/bash-alias-composer-link-use-local-folders-as-composer-dependancies
+
+composer config repositories.local '{"type": "path", "url": "'$1'"}' --file composer.json

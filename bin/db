@@ -1,0 +1,47 @@
+#!/bin/sh
+
+case "$1" in
+    "refresh" )
+        read -p "Refresh database $2? (y|n) " -n 1 -r
+        [[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
+
+        mysql -uroot -e "drop database $2; create database $2"
+    ;;
+
+    "create"|"make"|"new" )
+        mysql -uroot -e "create database $2"
+    ;;
+
+    "drop"|"rm"|"remove" )
+        read -p "Drop database $2? (y|n) " -n 1 -r
+        [[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
+
+        mysql -uroot -e "drop database $2"
+    ;;
+
+    "dump" )
+        mysqldump -uroot --skip-comments $2 > "$(date -u +"%Y-%m-%d-%H:%M:%S")_$2.sql"
+    ;;
+
+    "restore" )
+        if [ $# -lt 2 ]; then
+            printf "Usage: db restore [file] ([database])"
+            exit 1
+        fi
+
+        FILE=$2
+
+        if [ $# -gt 2 ]; then
+            DB_NAME=$3
+            mysql -uroot $DB_NAME < $FILE
+        else
+            mysql -u root < $FILE
+        fi
+
+        printf "\nRestored file %s" $FILE
+    ;;
+
+    * )
+        mysql -uroot -e "show databases" | perl -p -e's/\|| *//g'
+    ;;
+esac
