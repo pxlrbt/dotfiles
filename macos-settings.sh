@@ -180,11 +180,11 @@ sudo systemsetup -settimezone "Europe/Berlin" > /dev/null
 # Enable lid wakeup
 sudo pmset -a lidwake 1
 
-# Restart automatically on power loss
-sudo pmset -a autorestart 1
+# DON'T Restart automatically on power loss
+sudo pmset -a autorestart 0
 
-# Restart automatically if the computer freezes
-sudo systemsetup -setrestartfreeze on
+# DON'T Restart automatically if the computer freezes
+sudo systemsetup -setrestartfreeze off
 
 # Sleep the display after 15 minutes
 sudo pmset -a displaysleep 15
